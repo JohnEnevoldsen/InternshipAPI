@@ -1,6 +1,7 @@
 ﻿using InternshipAPI.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace InternshipAPI.Manager
 {
@@ -22,6 +23,16 @@ namespace InternshipAPI.Manager
         public IEnumerable<Person> GetOnePerson(string email, string password)
         {
             return _context.Person.Where(c => c.Mail.Equals(email) && c.Password.Equals(password));
+        }
+        public Person Update(string email, string oldPassword, string newPassword)
+        {
+            IEnumerable<Person> personsWithThatEmail = _context.Person.Where(c => c.Mail.Equals(email));
+            Person personToUpdate = personsWithThatEmail.First(c => c.Password.Equals(oldPassword));
+            if (personToUpdate == null) return null;
+            personToUpdate.Password = newPassword;
+            _context.Entry(personToUpdate).State = EntityState.Modified;
+            _context.SaveChanges();
+            return personToUpdate;
         }
     }
 }

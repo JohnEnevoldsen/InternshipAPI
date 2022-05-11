@@ -2,6 +2,7 @@
 using InternshipAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
@@ -31,9 +32,23 @@ namespace InternshipAPI.Controllers
             IEnumerable<Person> person = _manager.GetOnePerson(mail, ord);
             string jsonString = JsonSerializer.Serialize(person);
             if (jsonString == "[]") {
-                return NotFound("Der findes ikke en bruger med email: " + mail + " Og med det kodeord");
+                return NotFound("Der findes ikke en bruger med email: " + mail + " og med det kodeord");
             }
             return Ok(person);
+        }
+        [HttpPut("PutPath")]
+        public ActionResult<Person> Put([FromQuery] string email, string oldPassWord, string newValueWord)
+        {
+            try
+            {
+                Person updatedPerson = _manager.Update(email, oldPassWord, newValueWord);
+                if (updatedPerson == null) return NotFound("Der findes ikke en bruger med denne email: " + email);
+                return Ok(updatedPerson);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
