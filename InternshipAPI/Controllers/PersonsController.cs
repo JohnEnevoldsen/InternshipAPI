@@ -37,6 +37,9 @@ namespace InternshipAPI.Controllers
             return Ok(person);
         }
         [HttpPut("PutPath")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Person> Put([FromQuery] string email, string oldPassWord, string newValueWord)
         {
             try
