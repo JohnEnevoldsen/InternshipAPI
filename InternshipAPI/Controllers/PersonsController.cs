@@ -27,9 +27,9 @@ namespace InternshipAPI.Controllers
         [HttpGet("OnePerson")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Person> GetOnePerson([FromQuery] string mail, string ord)
+        public ActionResult<Person> GetOnePerson([FromQuery] string mail, string passWord)
         {
-            IEnumerable<Person> person = _manager.GetOnePerson(mail, ord);
+            IEnumerable<Person> person = _manager.GetOnePerson(mail, passWord);
             string jsonString = JsonSerializer.Serialize(person);
             if (jsonString == "[]") {
                 return NotFound("Der findes ikke en bruger med email: " + mail + " og med det kodeord");
@@ -40,11 +40,11 @@ namespace InternshipAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Person> Put([FromQuery] string email, string oldPassWord, string newValueWord)
+        public ActionResult<Person> Put([FromQuery] string email, string oldPassWord, string newPassWord)
         {
             try
             {
-                Person updatedPerson = _manager.Update(email, oldPassWord, newValueWord);
+                Person updatedPerson = _manager.Update(email, oldPassWord, newPassWord);
                 if (updatedPerson == null) return NotFound("Der findes ikke en bruger med denne email: " + email);
                 return Ok(updatedPerson);
             }

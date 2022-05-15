@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace InternshipAPI.Manager
 {
@@ -27,8 +28,16 @@ namespace InternshipAPI.Manager
         public Person Update(string email, string oldPassword, string newPassword)
         {
             IEnumerable<Person> personsWithThatEmail = _context.Person.Where(c => c.Mail.Equals(email));
-            Person personToUpdate = personsWithThatEmail.First(c => c.Password.Equals(oldPassword));
-            if (personToUpdate == null) return null;
+            Person personToUpdate = null;
+            try
+            {
+               personToUpdate = personsWithThatEmail.First(c => c.Password.Equals(oldPassword));
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+            
             personToUpdate.Password = newPassword;
             _context.Entry(personToUpdate).State = EntityState.Modified;
             _context.SaveChanges();
