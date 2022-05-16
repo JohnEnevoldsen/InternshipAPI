@@ -11,5 +11,6 @@ namespace InternshipAPI.Manager
         }
 
         public DbSet<Person> Person { get; set; }
+        public DbSet<Status> Status { get; set; }
     }
 }

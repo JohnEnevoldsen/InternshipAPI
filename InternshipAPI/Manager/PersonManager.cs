@@ -43,5 +43,35 @@ namespace InternshipAPI.Manager
             _context.SaveChanges();
             return personToUpdate;
         }
+        public Person AddPerson(Person newPerson)
+        {
+            try
+            {
+                _context.Person.Add(newPerson);
+                _context.SaveChanges();
+                try
+                {
+                    List<Status> statuses = new List<Status>
+                    {
+                        new Status{PersonId = newPerson.Id, MyStatus ="I am attending"},
+                        new Status{PersonId = newPerson.Id, MyStatus ="I am not attending"},
+                        new Status{PersonId = newPerson.Id, MyStatus ="I have not answered"}
+                    };
+                    _context.AddRange(statuses);
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateException ex)
+                {
+                    throw new OurDataBaseException(ex.InnerException.Message);
+                }
+                return newPerson;
+            }
+            catch (DbUpdateException ex)
+            {
+                _context.Person.Remove(newPerson);
+                throw new OurDataBaseException(ex.InnerException.Message);
+
+            }
+        }
     }
 }

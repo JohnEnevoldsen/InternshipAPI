@@ -53,5 +53,21 @@ namespace InternshipAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Person> Post([FromBody] Person value)
+        {
+            try
+            {
+                Person newPerson = _manager.AddPerson(value);
+                string uri = Url.RouteUrl(RouteData.Values) + "/" + newPerson.Id;
+                return Created(uri, newPerson);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
