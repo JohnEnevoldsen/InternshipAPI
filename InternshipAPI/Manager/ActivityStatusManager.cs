@@ -37,20 +37,11 @@ namespace InternshipAPI.Manager
 
             }
         }
-        public ActivityStatus Update(string statusToChangeTo, int activityId, int personId)
+        public ActivityStatus Update(int id, string statusToChangeTo)
         {
-            IEnumerable<Status> statusesWithThatPersonId = _context.Status.Where(c => c.PersonId.Equals(personId));
-
-            IEnumerable<ActivityStatus> activityStatuses = _context.ActivityStatus.Where(c => c.ActivityId.Equals(activityId));
-            
-            Status statusIdToChangeTo = statusesWithThatPersonId.First(c => c.MyStatus.Equals(statusToChangeTo));
-
-            ActivityStatus activityStatusToUpdate = new ActivityStatus();
-
-            activityStatusToUpdate = activityStatuses.First(c => c.Equals(statusesWithThatPersonId));
-
-            activityStatusToUpdate.StatusId = statusIdToChangeTo.Id;
-
+            ActivityStatus activityStatusToUpdate = _context.ActivityStatus.Find(id);
+            Status status = _context.Status.Where(c => c.MyStatus.Equals(statusToChangeTo)).FirstOrDefault();
+            activityStatusToUpdate.StatusId = status.Id;
             _context.Entry(activityStatusToUpdate).State = EntityState.Modified;
             _context.SaveChanges();
             return activityStatusToUpdate;

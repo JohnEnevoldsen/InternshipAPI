@@ -31,16 +31,16 @@ namespace InternshipAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPut("PutPath")]
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<ActivityStatus> Put([FromQuery] string statusToChangeTo, int activityId, int personId)
+        public ActionResult<ActivityStatus> Put([FromQuery] int id, string stringToChangeTo)
         {
             try
             {
-                ActivityStatus updatedActivityStatus = _manager.Update(statusToChangeTo, activityId, personId);
-                if (updatedActivityStatus == null) return NotFound("Her er statusToChangeTo: " + statusToChangeTo + " Her er activityId: " + activityId + " Her er personId:" + personId);
+                ActivityStatus updatedActivityStatus = _manager.Update(id, stringToChangeTo);
+                if (updatedActivityStatus == null) return NotFound("Her er statusToChangeTo: " + stringToChangeTo + " Her er Id: " + id);
                 return Ok(updatedActivityStatus);
             }
             catch (ArgumentException ex)
