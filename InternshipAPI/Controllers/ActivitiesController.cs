@@ -46,5 +46,11 @@ namespace InternshipAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("OnePersonAndTheirActivities")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IEnumerable<Activity> GetAllActitiviesWithThatPerson(int personId)
+        {
+            return _manager.GetAllActivitiesWithPersonId(personId);
+        }
     }
 }
