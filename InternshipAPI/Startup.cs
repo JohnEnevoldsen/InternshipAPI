@@ -30,20 +30,21 @@ namespace InternshipAPI
 
             services.AddControllers();
             // John
-            //services.AddDbContext<PersonContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            //services.AddDbContext<ActivityContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            //services.AddDbContext<CommentContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            //services.AddDbContext<ActivityStatusContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            //services.AddDbContext<StatusContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<PersonContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<ActivityContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<CommentContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<ActivityStatusContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<StatusContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
 
             // Søren
             //services.AddDbContext<PersonContext>(options => options.UseMySQL("Server=localhost; Database=HovedOpgave; User=root; Password=Padgok-mizdok-4cakbe"));
+            /*
             services.AddDbContext<PersonContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
             services.AddDbContext<ActivityContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
             services.AddDbContext<CommentContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
             services.AddDbContext<ActivityStatusContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
             services.AddDbContext<StatusContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
-
+            */
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "InternshipAPI", Version = "v1" });

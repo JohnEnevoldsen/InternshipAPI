@@ -3,6 +3,7 @@ using InternshipAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace InternshipAPI.Controllers
 {
@@ -15,6 +16,14 @@ namespace InternshipAPI.Controllers
         {
             _manager = new ActivityStatusManager(context);
         }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IEnumerable<ActivityStatus> Get()
+        {
+            return _manager.GetAllActivityStatuses();
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -35,7 +44,7 @@ namespace InternshipAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<ActivityStatus> Put([FromQuery] int id, string stringToChangeTo)
+        public ActionResult<ActivityStatus> Put(int id, [FromQuery] string stringToChangeTo)
         {
             try
             {

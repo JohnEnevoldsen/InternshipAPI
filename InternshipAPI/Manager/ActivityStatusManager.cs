@@ -37,6 +37,7 @@ namespace InternshipAPI.Manager
 
             }
         }
+        //Når man skal opdatere en persons dato, brug dette
         public ActivityStatus Update(int id, string statusToChangeTo)
         {
             ActivityStatus activityStatusToUpdate = _context.ActivityStatus.Find(id);
@@ -45,6 +46,10 @@ namespace InternshipAPI.Manager
             _context.Entry(activityStatusToUpdate).State = EntityState.Modified;
             _context.SaveChanges();
             return activityStatusToUpdate;
+        }
+        public IEnumerable<ActivityStatus> GetAllActivityStatuses()
+        {
+            return _context.ActivityStatus;
         }
     }
 }
