@@ -69,5 +69,14 @@ namespace InternshipAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Person> Delete(int id)
+        {
+            Person deletedPerson = _manager.DeletePerson(id);
+            if (deletedPerson == null) return NotFound("Der findes ikke en person med denne id: " + id);
+            return Ok(deletedPerson);
+        }
     }
 }

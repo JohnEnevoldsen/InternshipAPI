@@ -73,5 +73,13 @@ namespace InternshipAPI.Manager
 
             }
         }
+        public Person DeletePerson(int id)
+        {
+            Person person = _context.Person.Find(id);
+            if (person == null) return null;
+            _context.Person.Remove(person);
+            _context.SaveChanges();
+            return person;
+        }
     }
 }
