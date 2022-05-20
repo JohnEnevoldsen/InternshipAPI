@@ -77,13 +77,9 @@ namespace InternshipAPI.Manager
         {
             Person person = _context.Person.Find(id);
             if (person == null) return null;
-            List<Status> statuses = new List<Status>
-                    {
-                        new Status{PersonId = id, MyStatus ="I am attending"},
-                        new Status{PersonId = id, MyStatus ="I am not attending"},
-                        new Status{PersonId = id, MyStatus ="I have not answered"}
-                    };
+            List<Status> statuses = _context.Status.Where(x => x.PersonId == person.Id).ToList();
             _context.RemoveRange(statuses);
+            _context.SaveChanges();
             _context.Person.Remove(person);
             _context.SaveChanges();
             return person;
