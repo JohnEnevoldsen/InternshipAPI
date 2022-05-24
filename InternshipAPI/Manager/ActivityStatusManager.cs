@@ -37,7 +37,7 @@ namespace InternshipAPI.Manager
 
             }
         }
-        //Når man skal opdatere en persons dato, brug dette
+        //Når man skal opdatere en persons status, brug dette
         public ActivityStatus Update(int id, string statusToChangeTo)
         {
             ActivityStatus activityStatusToUpdate = _context.ActivityStatus.Find(id);

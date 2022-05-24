@@ -40,11 +40,11 @@ namespace InternshipAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Person> Put([FromQuery] string email, string oldPassWord, string newPassWord)
+        public ActionResult<Person> PutPassword([FromQuery] string email, string oldPassword, string newPassword)
         {
             try
             {
-                Person updatedPerson = _manager.Update(email, oldPassWord, newPassWord);
+                Person updatedPerson = _manager.UpdatePassword(email, oldPassword, newPassword);
                 if (updatedPerson == null) return NotFound("Der findes ikke en bruger med denne email: " + email);
                 return Ok(updatedPerson);
             }
@@ -77,6 +77,24 @@ namespace InternshipAPI.Controllers
             Person deletedPerson = _manager.DeletePerson(id);
             if (deletedPerson == null) return NotFound("Der findes ikke en person med denne id: " + id);
             return Ok(deletedPerson);
+        }
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Person> Put(int id, [FromBody] Person value)
+        {
+            try
+            {
+                Person updatedPerson = _manager.UpdatePerson(id, value);
+                if (updatedPerson == null) return NotFound("No such person, id: " + id);
+                return Ok(updatedPerson);
+
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

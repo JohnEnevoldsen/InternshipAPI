@@ -25,20 +25,20 @@ namespace InternshipAPI.Manager
         {
             return _context.Person.Where(c => c.Mail.Equals(email) && c.Password.Equals(password));
         }
-        public Person Update(string email, string oldPassword, string newPassword)
+        public Person UpdatePassword(string email, string oldpassword, string newpassword)
         {
             IEnumerable<Person> personsWithThatEmail = _context.Person.Where(c => c.Mail.Equals(email));
             Person personToUpdate = null;
             try
             {
-               personToUpdate = personsWithThatEmail.First(c => c.Password.Equals(oldPassword));
+               personToUpdate = personsWithThatEmail.First(c => c.Password.Equals(oldpassword));
             }
             catch (InvalidOperationException)
             {
                 return null;
             }
             
-            personToUpdate.Password = newPassword;
+            personToUpdate.Password = newpassword;
             _context.Entry(personToUpdate).State = EntityState.Modified;
             _context.SaveChanges();
             return personToUpdate;
@@ -83,6 +83,29 @@ namespace InternshipAPI.Manager
             _context.Person.Remove(person);
             _context.SaveChanges();
             return person;
+        }
+
+        public Person UpdatePerson(int id, Person updates)
+        {
+            try
+            {
+                Person person = _context.Person.Find(id);
+                if (person == null) return null;
+                person.Name = updates.Name;
+                person.Mail = updates.Mail;
+                person.Password = updates.Password;
+                person.TelephoneNumber = updates.TelephoneNumber;
+                person.Internship = updates.Internship;
+                person.School = updates.School;
+                person.Role = updates.Role;
+                _context.Entry(person).State = EntityState.Modified;
+                _context.SaveChanges();
+                return person;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new OurDataBaseException(updates + " " + ex.InnerException.Message);
+            }
         }
     }
 }
