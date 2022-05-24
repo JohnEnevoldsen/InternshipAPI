@@ -25,20 +25,20 @@ namespace InternshipAPI.Manager
         {
             return _context.Person.Where(c => c.Mail.Equals(email) && c.Password.Equals(password));
         }
-        public Person UpdatePassword(string email, string oldpassword, string newpassword)
+        public Person UpdatePassword(string email, string oldPassword, string newPassword)
         {
             IEnumerable<Person> personsWithThatEmail = _context.Person.Where(c => c.Mail.Equals(email));
             Person personToUpdate = null;
             try
             {
-               personToUpdate = personsWithThatEmail.First(c => c.Password.Equals(oldpassword));
+               personToUpdate = personsWithThatEmail.First(c => c.Password.Equals(oldPassword));
             }
             catch (InvalidOperationException)
             {
                 return null;
             }
             
-            personToUpdate.Password = newpassword;
+            personToUpdate.Password = newPassword;
             _context.Entry(personToUpdate).State = EntityState.Modified;
             _context.SaveChanges();
             return personToUpdate;
