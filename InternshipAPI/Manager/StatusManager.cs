@@ -1,4 +1,7 @@
-﻿namespace InternshipAPI.Manager
+﻿using InternshipAPI.Models;
+using System.Collections.Generic;
+
+namespace InternshipAPI.Manager
 {
     public class StatusManager
     {
@@ -10,6 +13,14 @@
         public StatusManager()
         {
 
+        }
+        public IEnumerable<Status> GetAllStatuses()
+        {
+            return _context.Status;
+        }
+        public Status GetStatusById(int id)
+        {
+            return _context.Status.Find(id);
         }
     }
 }

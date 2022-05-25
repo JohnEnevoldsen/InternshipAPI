@@ -10,6 +10,6 @@ namespace InternshipAPI.Manager
 
         }
 
-        public DbSet<Status> Activity { get; set; }
+        public DbSet<Status> Status { get; set; }
     }
 }
