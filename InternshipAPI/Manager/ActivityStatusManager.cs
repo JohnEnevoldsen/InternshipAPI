@@ -56,5 +56,27 @@ namespace InternshipAPI.Manager
         {
             return _context.ActivityStatus.Where(c => c.ActivityId.Equals(id));
         }
+        public ActivityStatus GetByActivityAndPersonId(int activityId, int personId)
+        {
+            IEnumerable<ActivityStatus> activityStatuses = _context.ActivityStatus.Where(c => c.ActivityId.Equals(activityId));
+            IEnumerable<Status> statuses = _context.Status.Where(c => c.PersonId.Equals(personId));
+            
+            foreach(var item in activityStatuses)
+            {
+                if(statuses.ElementAt<Status>(0).Id == item.StatusId)
+                {
+                    return item;
+                }
+                if(statuses.ElementAt<Status>(1).Id == item.StatusId)
+                {
+                    return item;
+                }
+                if (statuses.ElementAt<Status>(2).Id == item.StatusId)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }

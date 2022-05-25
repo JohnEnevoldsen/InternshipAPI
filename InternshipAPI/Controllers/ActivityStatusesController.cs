@@ -70,5 +70,10 @@ namespace InternshipAPI.Controllers
             }
             return NotFound("Der er ikke nogle aktiviteter med id: " + activityId);
         }
+        [HttpGet("StatusActivityWithThatActivityAndPerson")]
+        public ActionResult<ActivityStatus> GetByActivityIdAndPersonId(int activityId, int personId)
+        {
+            return _manager.GetByActivityAndPersonId(activityId, personId);
+        }
     }
 }
