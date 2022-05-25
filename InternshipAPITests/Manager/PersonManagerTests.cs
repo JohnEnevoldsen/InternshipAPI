@@ -55,6 +55,10 @@ namespace InternshipAPI.Manager.Tests
             Assert.AreEqual(contextPerson.Internship, managerPerson.First().Internship);
             Assert.AreEqual(contextPerson.School, managerPerson.First().School);
             Assert.AreEqual(contextPerson.Role, managerPerson.First().Role);
+
+            IEnumerable<Person> personThatDoesNotExist = personManager.GetOnePerson("EmailSomIkkeFindse", "Et kodeord");
+
+            Assert.ThrowsException<InvalidOperationException>(() => personThatDoesNotExist.First());
         }
         [TestMethod()]
         public void PersonManagerUpdatePasswordTest()
@@ -65,6 +69,8 @@ namespace InternshipAPI.Manager.Tests
 
             Person johnMedDetGamleKodeord = personManager.UpdatePassword("john@.dk", "tre", "to");
             Assert.AreEqual("to", johnMedDetGamleKodeord.Password);
+
+            Assert.IsNull(personManager.UpdatePassword("Email.lol", "Dette kommer ikke til at virke", "Null kommer tilbage"));
         }
         [TestMethod()]
         public void PersonManagerAddTest()
@@ -96,6 +102,8 @@ namespace InternshipAPI.Manager.Tests
         [TestMethod()]
         public void PersonManagerDeleteTest()
         {
+            //Jeg sletter to gange her
+
             Person personToAdd = new Person
             {
                 Name = "Slet",
@@ -136,6 +144,9 @@ namespace InternshipAPI.Manager.Tests
             Assert.AreEqual("Et sted i Danmark", newDeletedPerson.Internship);
             Assert.AreEqual("Zealand, Roskilde", newDeletedPerson.School);
             Assert.AreEqual("Bruger", newDeletedPerson.Role);
+
+            //Denne person findes ikke på min computer
+            Assert.IsNull(personManager.DeletePerson(1));
         }
         [TestMethod()]
         public void PersonManagerUpdateTest()
@@ -165,6 +176,9 @@ namespace InternshipAPI.Manager.Tests
             updatedPerson = personManager.UpdatePerson(7, updates);
             Assert.AreEqual("john@.dk", updatedPerson.Mail);
             Assert.AreEqual("to", updatedPerson.Password);
+
+            //Denne person findes ikke på min computer
+            Assert.IsNull(personManager.UpdatePerson(1, updates));
         }
     }
 }
