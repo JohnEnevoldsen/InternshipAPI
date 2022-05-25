@@ -51,5 +51,9 @@ namespace InternshipAPI.Manager
         {
             return _context.ActivityStatus;
         }
+        public IEnumerable<ActivityStatus>GetAllByActivity(int id)
+        {
+            return _context.ActivityStatus.Where(c => c.ActivityId.Equals(id));
+        }
     }
 }

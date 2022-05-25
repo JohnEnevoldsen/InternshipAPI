@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace InternshipAPI.Controllers
 {
@@ -56,6 +57,18 @@ namespace InternshipAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        [HttpGet("Activities")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<ActivityStatus> GetByActivityId(int activityId)
+        {
+            IEnumerable<ActivityStatus> activityStatuses = _manager.GetAllByActivity(activityId);
+            if (activityStatuses.Any())
+            {
+                return Ok(activityStatuses);
+            }
+            return NotFound("Der er ikke nogle aktiviteter med id: " + activityId);
         }
     }
 }
