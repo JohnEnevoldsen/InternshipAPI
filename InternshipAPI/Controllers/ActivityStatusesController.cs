@@ -45,11 +45,11 @@ namespace InternshipAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<ActivityStatus> Put(int id, [FromQuery] string stringToChangeTo)
+        public ActionResult<ActivityStatus> Put(int id, [FromQuery] int personId, string stringToChangeTo)
         {
             try
             {
-                ActivityStatus updatedActivityStatus = _manager.Update(id, stringToChangeTo);
+                ActivityStatus updatedActivityStatus = _manager.Update(id, personId, stringToChangeTo);
                 if (updatedActivityStatus == null) return NotFound("Her er statusToChangeTo: " + stringToChangeTo + " Her er Id: " + id);
                 return Ok(updatedActivityStatus);
             }

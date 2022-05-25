@@ -38,11 +38,12 @@ namespace InternshipAPI.Manager
             }
         }
         //Når man skal opdatere en persons status, brug dette
-        public ActivityStatus Update(int id, string statusToChangeTo)
+        public ActivityStatus Update(int id, int personId, string statusToChangeTo)
         {
             ActivityStatus activityStatusToUpdate = _context.ActivityStatus.Find(id);
-            Status status = _context.Status.Where(c => c.MyStatus.Equals(statusToChangeTo)).FirstOrDefault();
-            activityStatusToUpdate.StatusId = status.Id;
+            IEnumerable<Status> statuses = _context.Status.Where(c => c.PersonId.Equals(personId));
+            IEnumerable<Status> statusWithTheId = statuses.Where(c => c.MyStatus.Equals(statusToChangeTo));
+            activityStatusToUpdate.StatusId = statusWithTheId.First().Id;
             _context.Entry(activityStatusToUpdate).State = EntityState.Modified;
             _context.SaveChanges();
             return activityStatusToUpdate;
