@@ -60,7 +60,7 @@ namespace InternshipAPI.Manager
         {
             IEnumerable<ActivityStatus> activityStatuses = _context.ActivityStatus.Where(c => c.ActivityId.Equals(activityId));
             IEnumerable<Status> statuses = _context.Status.Where(c => c.PersonId.Equals(personId));
-            
+
             foreach(var item in activityStatuses)
             {
                 if(statuses.ElementAt<Status>(0).Id == item.StatusId)
