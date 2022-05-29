@@ -37,6 +37,7 @@ namespace InternshipAPI
             services.AddDbContext<StatusContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
             services.AddDbContext<GroupContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
             services.AddDbContext<GroupOfPeopleContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<ActivityAndGroupsOfPeopleContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
 
             // Søren
             /*
