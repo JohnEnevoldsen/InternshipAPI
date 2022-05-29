@@ -25,11 +25,11 @@ namespace InternshipAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<ActivityAndGroupsOfPeople> Post(int activityId, int groupOfPeopleId)
+        public ActionResult<ActivityAndGroupsOfPeople> Post(int activityId, int groupId)
         {
             try
             {
-                IEnumerable<ActivityAndGroupsOfPeople> newActivityAndGroupsOfPeople = _manager.addGroupToActivity(activityId, groupOfPeopleId);
+                IEnumerable<ActivityAndGroupsOfPeople> newActivityAndGroupsOfPeople = _manager.addGroupToActivity(activityId, groupId);
                 string uri = Url.RouteUrl(RouteData.Values) + "/" + newActivityAndGroupsOfPeople;
                 return Created(uri, newActivityAndGroupsOfPeople);
             }

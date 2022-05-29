@@ -20,11 +20,11 @@ namespace InternshipAPI.Manager
         {
             return _context.ActivityAndGroupsOfPeople;
         }
-        public IEnumerable<ActivityAndGroupsOfPeople> addGroupToActivity(int activityId, int groupOfPeopleId)
+        public IEnumerable<ActivityAndGroupsOfPeople> addGroupToActivity(int activityId, int groupId)
         {
             try
             {
-                IEnumerable<GroupOfPeople> groupOfPeople = _context.GroupOfPeople.Where(c => c.GroupId.Equals(groupOfPeopleId));
+                IEnumerable<GroupOfPeople> groupOfPeople = _context.GroupOfPeople.Where(c => c.GroupId.Equals(groupId));
                 List<ActivityAndGroupsOfPeople> activityAndGroupsOfPeople = new List<ActivityAndGroupsOfPeople>();
                 foreach (var groupOfPeopleRow in groupOfPeople)
                 {
