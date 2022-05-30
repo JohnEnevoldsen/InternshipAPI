@@ -107,5 +107,9 @@ namespace InternshipAPI.Manager
                 throw new OurDataBaseException(updates + " " + ex.InnerException.Message);
             }
         }
+        public Person GetPersonById(int id)
+        {
+            return _context.Person.Find(id);
+        }
     }
 }

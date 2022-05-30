@@ -24,6 +24,13 @@ namespace InternshipAPI.Controllers
         {
             return _manager.GetAllPersons();
         }
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public Person Get(int id)
+        {
+            return _manager.GetPersonById(id);
+        }
         [HttpGet("OnePerson")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
