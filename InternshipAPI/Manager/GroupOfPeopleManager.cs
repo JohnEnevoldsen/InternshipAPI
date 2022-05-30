@@ -1,6 +1,7 @@
 ﻿using InternshipAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace InternshipAPI.Manager
 {
@@ -37,6 +38,10 @@ namespace InternshipAPI.Manager
         public IEnumerable<GroupOfPeople> GetAllGroupsOfPeople()
         {
             return _context.GroupOfPeople;
+        }
+        public IEnumerable<GroupOfPeople> GetAllWithThatGroupId(int groupId)
+        {
+            return _context.GroupOfPeople.Where(c => c.GroupId.Equals(groupId));
         }
     }
 }

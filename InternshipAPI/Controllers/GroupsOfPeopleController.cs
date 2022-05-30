@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace InternshipAPI.Controllers
 {
@@ -21,6 +22,18 @@ namespace InternshipAPI.Controllers
         public IEnumerable<GroupOfPeople> Get()
         {
             return _manager.GetAllGroupsOfPeople();
+        }
+        [HttpGet("Groups")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<GroupOfPeople> GetAllWithGroupId(int groupId)
+        {
+            IEnumerable<GroupOfPeople> groupsOfPeople = _manager.GetAllWithThatGroupId(groupId);
+            if (groupsOfPeople.Any())
+            {
+                return Ok(groupsOfPeople);
+            }
+            return NotFound("Der er ikke nogle grupper med id: " + groupId);
         }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]

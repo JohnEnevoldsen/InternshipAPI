@@ -10,5 +10,7 @@ namespace InternshipAPI.Manager
 
         }
         public DbSet<Group> Group { get; set; }
+        public DbSet<GroupOfPeople> GroupOfPeople { get; set; }
+        public DbSet<ActivityAndGroupsOfPeople> ActivityAndGroupsOfPeople { get; set; }
     }
 }
