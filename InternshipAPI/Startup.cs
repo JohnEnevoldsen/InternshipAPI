@@ -30,22 +30,31 @@ namespace InternshipAPI
 
             services.AddControllers();
             // John
-            services.AddDbContext<PersonContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            services.AddDbContext<ActivityContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            services.AddDbContext<CommentContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            services.AddDbContext<ActivityStatusContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            services.AddDbContext<StatusContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            services.AddDbContext<GroupContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            services.AddDbContext<GroupOfPeopleContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
-            services.AddDbContext<ActivityAndGroupsOfPeopleContext>(opt => opt.UseSqlServer(@"Server=DESKTOP-8NVTJM1\SQLEXPRESS; Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+
+            string serverString = @"Server=DESKTOP-8NVTJM1\SQLEXPRESS;";
+
+            services.AddDbContext<PersonContext>(opt => opt.UseSqlServer(serverString + " Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<ActivityContext>(opt => opt.UseSqlServer(serverString + " Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<CommentContext>(opt => opt.UseSqlServer(serverString + " Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<ActivityStatusContext>(opt => opt.UseSqlServer(serverString + " Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<StatusContext>(opt => opt.UseSqlServer(serverString + " Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<GroupContext>(opt => opt.UseSqlServer(serverString + " Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<GroupOfPeopleContext>(opt => opt.UseSqlServer(serverString + " Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddDbContext<ActivityAndGroupsOfPeopleContext>(opt => opt.UseSqlServer(serverString + " Database=HovedOpgave; Trusted_Connection=True;MultipleActiveResultSets=true"));
 
             // Søren
+
             /*
-            services.AddDbContext<PersonContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
-            services.AddDbContext<ActivityContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
-            services.AddDbContext<CommentContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
-            services.AddDbContext<ActivityStatusContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
-            services.AddDbContext<StatusContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; Password=Padgok-mizdok-4cakbe; MultipleActiveResultSets=true"));
+            string connectionStringPassword = "Padgok-mizdok-4cakbe;";
+
+            services.AddDbContext<PersonContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
+            services.AddDbContext<ActivityContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
+            services.AddDbContext<CommentContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
+            services.AddDbContext<ActivityStatusContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
+            services.AddDbContext<StatusContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
+            services.AddDbContext<GroupContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
+            services.AddDbContext<GroupOfPeopleContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
+            services.AddDbContext<ActivityAndGroupsOfPeopleContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
             */
             services.AddSwaggerGen(c =>
             {
