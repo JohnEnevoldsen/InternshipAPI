@@ -45,7 +45,7 @@ namespace InternshipAPI
             // Søren
 
             /*
-            string connectionStringPassword = "Padgok-mizdok-4cakbe;";
+            string connectionStringPassword = "Password=Padgok-mizdok-4cakbe;";
 
             services.AddDbContext<PersonContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
             services.AddDbContext<ActivityContext>(opt => opt.UseSqlServer(@"Server=localhost; Database=HovedOpgave; User=SA; " + connectionStringPassword + " MultipleActiveResultSets=true"));
