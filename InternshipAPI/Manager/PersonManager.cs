@@ -78,6 +78,31 @@ namespace InternshipAPI.Manager
             Person person = _context.Person.Find(id);
             if (person == null) return null;
             List<Status> statuses = _context.Status.Where(x => x.PersonId == person.Id).ToList();
+            List<GroupOfPeople> groupOfPeoples = _context.GroupOfPeople.Where(x => x.PersonId == id).ToList();
+            List<ActivityAndGroupsOfPeople> activityAndGroupsOfPeople = new List<ActivityAndGroupsOfPeople>();
+            foreach (var groupOfPeopleRow in groupOfPeoples)
+            {
+                List<ActivityAndGroupsOfPeople> activityAndGroupsOfPeoplesWhereGroupOfPeople = _context.ActivityAndGroupsOfPeople.Where(x => x.GroupsOfPeopleId == groupOfPeopleRow.Id).ToList();
+                foreach (var item in activityAndGroupsOfPeoplesWhereGroupOfPeople)
+                {
+                    activityAndGroupsOfPeople.Add(item);
+                }
+            }
+            List<ActivityStatus> activityStatusesToDelete = new List<ActivityStatus>();
+            foreach(var status in statuses)
+            {
+                List<ActivityStatus> activityStatuses = _context.ActivityStatus.Where(x => x.StatusId == status.Id).ToList();
+                foreach(var item in activityStatuses)
+                {
+                    activityStatusesToDelete.Add(item);
+                }
+            }
+            _context.RemoveRange(activityAndGroupsOfPeople);
+            _context.SaveChanges();
+            _context.RemoveRange(groupOfPeoples);
+            _context.SaveChanges();
+            _context.RemoveRange(activityStatusesToDelete);
+            _context.SaveChanges();
             _context.RemoveRange(statuses);
             _context.SaveChanges();
             _context.Person.Remove(person);

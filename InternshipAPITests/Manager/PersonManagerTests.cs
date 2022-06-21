@@ -180,5 +180,20 @@ namespace InternshipAPI.Manager.Tests
             //Denne person findes ikke på min computer
             Assert.IsNull(personManager.UpdatePerson(1, updates));
         }
+        [TestMethod()]
+        public void PersonManagerGetByIdTest()
+        {
+            //Denne virker også kun på min
+            Person personById = personManager.GetPersonById(7);
+            Assert.AreEqual(7, personById.Id);
+            Assert.AreEqual("Test John1", personById.Name);
+            Assert.AreEqual("john@.dk", personById.Mail);
+            Assert.AreEqual("to", personById.Password);
+            Assert.AreEqual("31210102", personById.TelephoneNumber);
+            Assert.AreEqual("Et sted i Danmark og jeg fik syv", personById.Internship);
+            Assert.AreEqual("Zealand, Roskilde, den bedste skole", personById.School);
+            Assert.AreEqual("Admin", personById.Role);
+            Assert.IsNull(personManager.GetPersonById(1));
+        }
     }
 }
